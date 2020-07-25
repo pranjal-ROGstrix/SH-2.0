@@ -1,1 +1,1 @@
-window.url = "http://6551ea990b1c.ngrok.io/";
+window.url = "http://96e6352f7713.ngrok.io/";

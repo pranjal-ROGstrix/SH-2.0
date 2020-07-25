@@ -11,10 +11,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="view_distance.css">
 </head>
 
-<body ng-app="myApp" ng-controller="homeCtrl as home">
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -30,47 +30,23 @@
                 <li class="nav-item">
                     <a class="nav-link" ui-sref="profile">Your Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" ng-click="home.signout()">Logout</a>
-                </li>
             </ul>
         </div>
     </nav>
 
-    <div class="container" >
+    <div class="container-fluid" ng-app="myApp" ng-controller="profileCtrl as profile">
         <div class="ui-router">
             <div class="main-content">
-                <div class="form-group">
-                    <table class="table category">
-                        <h3 class="text-center category">Select a category</h3>
-                        <tr ng-repeat="x in home.category">
-                            <td ng-click="home.selectedCategory(x)">{{x.type}}</td>
-                        </tr>
-                    </table>
-                    <table class="table shopname">
-                        <h3 class="text-center shopname">Select a category</h3>
-                        <tr>
-                            <th>Shop Names</th>
-                        </tr>
-                        <tr ng-repeat="x in home.shops">
-                            <td ng-click="home.selectedShop(x)">{{x.shopname}}</td>
-                        </tr>
-                    </table>
-                </div>
+        <div id="map"></div>
             </div>
         </div>
     </div>
 
 
-
-
-
-
-
     <!-- JS, Popper.js, and jQuery -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -80,10 +56,17 @@
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
     <!-- AngularJS -->
-    <script src="index.js"></script>
+    <script src="view_distance.js" defer></script>
     <script src="../../url.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyJe4yLMHd2Rd6Km6z5thlj9ZIvaBJqO8&callback=initMap">
+        </script>
+
 
 
 </body>
 
 </html>
+
+
+<!-- https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=26.8956313,80.9673629&destinations=26.884107,80.964958&key=AIzaSyDyJe4yLMHd2Rd6Km6z5thlj9ZIvaBJqO8 -->

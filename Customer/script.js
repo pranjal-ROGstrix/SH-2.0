@@ -6,6 +6,7 @@
     app.controller('loginCtrl', function ($http) {
         let login = this;
         login.submit = () => {
+            console.log(login)
             $http({
                     method: 'POST',
                     url: url + 'registration/login/',
