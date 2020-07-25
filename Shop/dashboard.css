@@ -1,0 +1,250 @@
+/*******************************************************************
+ * SASS Stuff
+ ******************************************************************/
+$animation_speed: 300ms;
+$closed-height: 50px;
+$open-height: 300px;
+$margin: 20px;
+
+
+// Mixin for the box shadow.  Ripped verbatim from Google Inbox :)
+@mixin shadow() {
+    bottom: 0;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    content: '';
+    display: block;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+/*******************************************************************
+ * DEFAULT STYLES
+ *
+ * Just fer lookin...
+ ******************************************************************/
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background: #f2f2f2;
+    display: flex;
+    align-items: start;
+    color: #333;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+.wrapper {
+    width: 66.66%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 60px;
+}
+
+// Pretend this is a real icon...
+.icon {
+    height: 28px;
+    width: 28px;
+    border-radius: 14px;
+    background: seagreen;
+}
+
+.message {
+    background: #fff;
+}
+
+.message__summary {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+    height: $closed-height;
+    position: relative;
+    padding: 0 15px;
+
+    .message__summary__icon {
+        padding: 10px 22px;
+    }
+
+    .message__summary__body {
+        padding-left: 16px;
+        color: lighten(#333, 30%);
+    }
+
+    &:before {
+        @include shadow();
+    }
+}
+
+.message__details {
+
+    line-height: 1.5;
+    width: 100%;
+
+    .message__details__body {
+        border-top: 1px solid #e5e5e5;
+        background: #d9d9d9;
+        height: $open-height;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+    }
+}
+
+
+
+/*******************************************************************
+ * ANIMATION STYLES
+ ******************************************************************/
+
+.message {
+    position: relative;
+    transition: all $animation_speed;
+}
+
+// Message details start out hidden and are brought in via Javascript
+.message__details {
+    display: none;
+}
+
+
+.grower {
+    height: 0;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    background: #fff;
+    transform: scale(1, 1);
+    transform-origin: center top;
+}
+
+.message--opening,
+.message--open {
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: $margin;
+    margin-top: $margin;
+}
+
+// Opening animation class
+// Only applied when animating, it's removed after the animation
+.message--opening {
+    .grower {
+        height: $closed-height;
+        animation: scale-out $animation_speed forwards;
+    }
+
+    // Unhide the details, but keep them off screen
+    .message__details {
+        display: block;
+        position: absolute;
+        
+        left: -50000px;
+        width: 100%;
+    }
+
+    // Hide the pseudo element when animating (the box-shadow) so it looks like
+    // the summary itself is growing.  We'll then fade out the summary.
+    > .message__summary {
+        &:before {
+            display:none;
+        }
+        
+        animation: fade-out $animation_speed forwards;
+    }
+
+}
+
+// Opened class.  Applied after the open animation.
+.message--open {
+    > .message__summary {
+        display: none;
+    }
+
+    .grower {
+        display: none;
+    }
+
+    // We now bring in the details
+    .message__details {
+        display: block;
+        position: static;
+        opacity: 0.0001;
+        animation-name: fade-in;
+        animation-duration: $animation_speed;
+        animation-fill-mode: forwards;
+    }
+}
+
+.message--closing {
+    // height: 0;
+    .grower {
+        // height: 0;
+        // transition: all $animation-speed;
+    }
+    
+}
+
+/*******************************************************************
+ * KEYFRAMES
+ ******************************************************************/
+@keyframes scale-out {
+    0% {
+        transform: scale(1, 1);
+    }
+    80%, 100% {
+        transform: scale(1, ($open-height + $closed-height) / $closed-height);
+    }
+}
+
+@keyframes scale-in {
+    0% {
+        transform: scale(1, ($open-height + $closed-height) / $closed-height);
+    }
+    80%, 100% {
+        transform: scale(1, 1);
+    }
+}
+
+@keyframes fade-out {
+    0%,33% {
+        opacity: 0.9999;
+    }
+
+    100% {
+        opacity: 0.0001;
+    };
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0.0001;
+    }
+
+    100% {
+        opacity: 0.9999;
+    };
+}
+
+.pusher {
+    &.opening {
+        transition: all $animation-speed;
+    }
+    
+    &.closing {
+        transition: all $animation-speed;
+    }
+}

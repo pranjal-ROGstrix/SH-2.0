@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOMEPAGE</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref="profile">Your Profile</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid" ng-app="myApp" ng-controller="profileCtrl as profile">
+        <div class="ui-router">
+            <div class="main-content">
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Enter Your Address Here</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            ng-model="profile.address">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="profile.geolocation()">View Location On
+                        Map</button>
+                    <br><br>
+                    <button type="submit" class="btn btn-primary" ng-click="profile.saveAddress()">Save Address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="map" style="width:100vw;height:100vw;"></div>
+
+
+    <!-- JS, Popper.js, and jQuery -->
+
+    <script src="http://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <!-- AngularJS -->
+    <script src="profile.js" defer></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyJe4yLMHd2Rd6Km6z5thlj9ZIvaBJqO8&callback=initMap">
+    </script>
+    <script src="../../url.js"></script>
+
+
+
+</body>
+
+</html>
